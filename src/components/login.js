@@ -45,9 +45,10 @@ export default function Login() {
                 pwd: password
             }).then(response => {
                 setAuthKey(response.data)
-                if (currentUser !== "" && response.data === "guest-ok") {
+                if (currentUser !== "" && response.data !== '') {
                     localStorage.setItem("currentUser", currentUser)
                     localStorage.setItem("password", password)
+                    localStorage.setItem('clientNo', response.data[0].clientNo)
                     navigate('/guest-home')
                     window.location.reload();
                 } else {

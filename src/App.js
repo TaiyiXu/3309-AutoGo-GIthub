@@ -11,7 +11,11 @@ import StaffSignup from './components/staff_signup'
 import GuestSignup from './components/guest_signup'
 import GuestViewAppointment from './components/guest_view_appointments';
 import StaffViewAppointment from './components/staff_view_appointment';
+<<<<<<< HEAD
 import StaffViewBRevenue from './components/staff_view_BRevenue';
+=======
+import AddAppointment from './components/guest_add_appointment';
+>>>>>>> 6d9dbf456d3a9c9393bc690732e969b5da191d03
 
 class App extends Component {
   render() {
@@ -55,7 +59,11 @@ class App extends Component {
             <Route path="/staff-home" element={<StaffHome />} />
             <Route path="/guest-view-appointment" element={<GuestViewAppointment />} />
             <Route path="/staff-view-appointment" element={<StaffViewAppointment />} />
+<<<<<<< HEAD
             <Route path="/staff-view-BRevenue" element={<StaffViewBRevenue />}/>
+=======
+            <Route path="/add-appointment" element={<AddAppointment />} /> 
+>>>>>>> 6d9dbf456d3a9c9393bc690732e969b5da191d03
           </Routes>
         </div>
         <footer className="py-3 my-4">

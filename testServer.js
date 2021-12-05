@@ -12,22 +12,22 @@ conn.connect();
 //                 console.log(r);
 //             })
 
+let date = '2021-10-10 13:00:00';
+let branchNo=1;
+let clientNo=1;
+let licensePlate='ADPU092'
 
-conn.query(`SELECT a.appointmentNo, c.licensePlate ,c.model, c.make, ser.serviceType, ser.serviceDescription, a.date
-            FROM   appointments a, cars c, services ser,  serciveAppointment sa,  appointmentStaff astf
-            WHERE c.licensePlate = a.licensePlate  AND a.appointmentNo = sa.appointmentNo AND ser.serviceType = sa.serviceType 
-                AND a.appointmentNo = astf.appointmentNo AND astf.staffNo=1
-            ORDER BY a.appointmentNo
-            `,
+conn.query("INSERT INTO appointments VALUES (?,?,?,?,?)", ['NULL', date, branchNo, clientNo, licensePlate]
+            ,
     (error, rows, fields) => {
         if (error) { console.log(error); }
         else {
-            console.log(rows)
+            console.log('INSERT SUCCESS')
         }
 
-        for (r of rows) {
-            console.log(r);
-        }
+        // for (r of rows) {
+        //     console.log(r);
+        // }
 
     })
 

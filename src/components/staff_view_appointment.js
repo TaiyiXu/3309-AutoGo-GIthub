@@ -36,11 +36,16 @@ export default function StaffViewAppointment() {
                 <a href='/staff-home' style={a_style}>Back to Staff Home Page</a><br />
             </div>
             <button onClick={getResultList}>Show Appointments</button>
-
+            <br></br>
+            <input value='AppointmentNo' readOnly></input>
+            <input value='Service Type'readOnly></input>
+            <input value='Service Description' readOnly></input>
+            <input value='Date' readOnly></input>
+            <input value='License Plate'readOnly></input>
+            <br></br>
             {resultList.map((val) => {
-                console.log(val)
-
                 return <div>
+<<<<<<< HEAD
                     <input value='AppointmentNo' readOnly></input>
                     <input value='Service Type' readOnly></input>
                     <input value='Service Description' readOnly></input>
@@ -53,6 +58,13 @@ export default function StaffViewAppointment() {
                     <input value={val.date} readOnly></input>
                     <input value={val.date | DataView} readOnly></input>
                     <input value={val.licensePlate} readOnly></input>
+=======
+                        <input value={val.appointmentNo} readOnly></input>
+                        <input value={val.serviceType} readOnly></input>
+                        <input value={val.serviceDescription} readOnly></input>
+                        <input value={val.date} readOnly></input>
+                        <input value={val.licensePlate} readOnly></input>
+>>>>>>> 6d9dbf456d3a9c9393bc690732e969b5da191d03
                 </div>
             })}
         </div>
