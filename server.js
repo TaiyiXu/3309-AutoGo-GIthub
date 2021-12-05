@@ -16,6 +16,34 @@ app.use(express.static('build'))// @lil explain!
 app.use(cookieParser("D7C84966-88F9-4BF7-8805-9FBADDFAAA9F"))
 
 
+app.post('/api/staff_view_BRevenue', function (req, res) {
+    conn = newConnection();
+    conn.connect();
+
+    const username = req.body.userName
+    const password = req.body.password
+    const dateFrom = req.body.dateFrom
+    const dateTo = req.body.dateTo
+    //2021-08-20 10:00:00
+    conn.query(`SELECT b.branchNo, b.location, SUM(ser.price) as totalPayment
+    FROM services ser, client c, appointments a, branches b, serciveAppointment sa
+    WHERE ser.serviceType=sa.serviceType AND a.appointmentNo = sa.appointmentNo
+    AND a.clientNo = c.clientNo AND a.branchNo = b.branchNo
+    AND date >= '2021-08-01 00:00:00' AND date <= '2021-08-31 00:00:00'
+    GROUP BY b.branchNo
+    ORDER BY a.appointmentNo
+    `
+    ,
+        (error, rows, fields) => {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                res.send(rows)
+            }
+        })
+})
+
 app.post('/api/staff_view_appointment', function (req, res) {
     conn = newConnection();
     conn.connect();
@@ -24,11 +52,10 @@ app.post('/api/staff_view_appointment', function (req, res) {
     const password = req.body.password
 
     conn.query(`SELECT a.appointmentNo, c.licensePlate ,c.model, c.make, ser.serviceType, ser.serviceDescription, a.date
-                    FROM   appointments a, cars c, services ser,  serciveAppointment sa,  appointmentStaff astf
+                    FROM appointments a, cars c, services ser,  serciveAppointment sa,  appointmentStaff astf
                     WHERE c.licensePlate = a.licensePlate  AND a.appointmentNo = sa.appointmentNo AND ser.serviceType = sa.serviceType 
-                          AND a.appointmentNo = astf.appointmentNo AND astf.staffNo=(SELECT staffNo FROM staffs WHERE name = '${userName}' AND password = '${password}')
-                    ORDER BY a.appointmentNo
-                `,
+                    AND a.appointmentNo = astf.appointmentNo AND astf.staffNo=(SELECT staffNo FROM staffs WHERE name = '${userName}' AND password = '${password}')
+                    ORDER BY a.appointmentNo`,
         (error, rows, fields) => {
             if (error) {
                 console.log(error);
