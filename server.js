@@ -29,7 +29,7 @@ app.post('/api/staff_view_BRevenue', function (req, res) {
     FROM services ser, client c, appointments a, branches b, serciveAppointment sa
     WHERE ser.serviceType=sa.serviceType AND a.appointmentNo = sa.appointmentNo
     AND a.clientNo = c.clientNo AND a.branchNo = b.branchNo
-    AND date >= '2021-08-01 00:00:00' AND date <= '2021-08-31 00:00:00'
+    AND date >= '2021-08-01 ' AND date <= '2021-08-31 00:00:00'
     GROUP BY b.branchNo
     ORDER BY a.appointmentNo`,
         (error, rows, fields) => {
